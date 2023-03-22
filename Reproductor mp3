@@ -1,0 +1,81 @@
+from tkinter import*                      #importamos la libreria
+from tkinter import filedialog
+import pygame, sys
+from pygame.locals import*
+from PIL import ImageTk, Image
+import os
+
+pygame.init() #iniciamos modulo de pygame
+#funcion abrir cancion 
+def openFile():
+    cancion = filedialog.askopenfilename() #guardar la cancion que queremos reproducir
+    print(cancion)
+    pygame.mixer.music.load(cancion)
+    
+    pass
+def playSong():
+    pygame.mixer.music.play()
+    pass
+def stopSong():
+    pygame.mixer.music.stop()
+    pass
+def pauseSong():
+    pygame.mixer.music.pause()
+    pass
+def resumeSong():
+    pygame.mixer.music.unpause()
+    pass
+def volumenSong1():
+    volumenLevel = pygame.mixer.music.get_volume() + 0.5
+    print(volumenLevel)
+    pygame.mixer.music.set_volume(volumenLevel)
+    pass
+def volumenSong2():
+    volumenLevel = pygame.mixer.music.get_volume() - 0.5
+    print(volumenLevel)
+    pygame.mixer.music.set_volume(volumenLevel)
+    pass
+
+
+
+raiz = Tk()                               #instancia cin el objeto
+raiz.title("Spotify")
+raiz.iconbitmap('nota-musical.ico') 
+raiz.geometry("400x400")
+raiz.resizable(False,False)
+
+#crear frame
+framePrincipal = Frame(raiz, bg="#000000")
+framePrincipal.pack(fill="both", expand = 1)
+#titulo reproductor
+tituloReproductor = Label(framePrincipal, text= "Reproductor MP3", font=("Roboto", 11,"bold"), bg="#4a3a3a", fg="#fbfbfb")
+tituloReproductor.pack()
+
+#boton opensong
+botonOpenSong = Button(framePrincipal, text = "Open", bg="#E7D40A", fg="#fbfbfb", font=("Roboto", 10, "bold"), width=7, height=2, command=openFile)
+botonOpenSong.place(relx=0.04, rely=0.6)
+
+#boton playsong
+botonPlaySong = Button(framePrincipal, text = "Play", bg="#42ab49", fg="#fbfbfb", font=("Roboto", 10, "bold"), width=7, height=2, command=playSong)
+botonPlaySong.place(relx=0.23, rely=0.6)
+
+#boton stopsong
+botonStopSong = Button(framePrincipal, text = "Stop", bg="#e2504c", fg="#fbfbfb", font=("Roboto", 10, "bold"), width=7, height=2, command=stopSong)
+botonStopSong.place(relx=0.42, rely=0.6)
+
+#boton resumesong
+botonResumeSong = Button(framePrincipal, text = "Resume", bg="#23BAC4", fg="#fbfbfb", font=("Roboto", 10, "bold"), width=7, height=2, command=resumeSong)
+botonResumeSong.place(relx=0.61, rely=0.6)
+
+#boton pausesong
+botonPauseSong = Button(framePrincipal, text = "Pause", bg="#024A86", fg="#fbfbfb", font=("Roboto", 10, "bold"), width=7, height=2, command=pauseSong)
+botonPauseSong.place(relx=0.8, rely=0.6)
+
+#boton volumensong
+botonVolumenAlt = Button(framePrincipal, text = "Volumen +", bg="#024A86", fg="#fbfbfb", font=("Roboto", 10, "bold"), width=8, height=2, command=volumenSong1)
+botonVolumenAlt.place(relx=0.2, rely=0.8)
+
+#boton volumensong
+botonVolumenlow = Button(framePrincipal, text = "Volumen -", bg="#024A86", fg="#fbfbfb", font=("Roboto", 10, "bold"), width=8, height=2, command=volumenSong2)
+botonVolumenlow.place(relx=0.64, rely=0.8)
+raiz.mainloop()   
